@@ -1,0 +1,352 @@
+[
+  {
+    "ContainingType": "API.Controllers.Auth",
+    "Method": "CHK_Login",
+    "RelativePath": "Auth/chk_login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelAuth\u002BparamLogin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Auth",
+    "Method": "CHK_Emp_Login",
+    "RelativePath": "Auth/chk_login_emp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelAuth\u002BparamLogin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Doplan",
+    "Method": "EDIT_DOPLAN",
+    "RelativePath": "Doplan/EditDOPlan",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelDoplan\u002BDOPLANKEY",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Doplan",
+    "Method": "GET_DOPLAN",
+    "RelativePath": "Doplan/GetDoPlan",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Doplan",
+    "Method": "GET_HISTORYPLAN",
+    "RelativePath": "Doplan/GetHistoryPlan",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelDoplan\u002BDOPLANKEY",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Doplan",
+    "Method": "GET_RECIVEDATE",
+    "RelativePath": "Doplan/Getrecdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelDoplan\u002BDOPLANKEY",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Doplan",
+    "Method": "GET_REPORT_PLAN",
+    "RelativePath": "Doplan/GetReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Doplan",
+    "Method": "GET_VDMSTR",
+    "RelativePath": "Doplan/GetVDMstr",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "DEL_CALENDAR_DCI",
+    "RelativePath": "Master/DelCalDCI",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelMaster\u002BparamCalftt",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "DEL_CALENDAR_FTT",
+    "RelativePath": "Master/DelCalFTT",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelMaster\u002BparamCalftt",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "DEL_PARTMSTR",
+    "RelativePath": "Master/DelPartMstr",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelMaster\u002BparamPartmstr",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "EDIT_DELIVERYCYCLE",
+    "RelativePath": "Master/EditDelCycle",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelMaster\u002BparamDelcycle",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "EDIT_PARTMSTR",
+    "RelativePath": "Master/EditPartMstr",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelMaster\u002BparamPartmstr",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "EDIT_WHMSTR",
+    "RelativePath": "Master/EditWhmstr",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelMaster\u002BparamWhoutsite",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "GET_CALENDAR_DCI",
+    "RelativePath": "Master/GetCalDCI",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "GET_CALENDAR_FTT",
+    "RelativePath": "Master/GetCalFTT",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "GET_DELIVERYCYCLE",
+    "RelativePath": "Master/GetDelCycle",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "GET_PARTMSTR",
+    "RelativePath": "Master/GetPartMstr",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "GET_RANGE_DATE",
+    "RelativePath": "Master/GetRangeDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "GET_SHARE_VENDER",
+    "RelativePath": "Master/GetSharevd",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "GET_WHMSTR",
+    "RelativePath": "Master/GetWhmstr",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "SET_CALENDAR_DCI",
+    "RelativePath": "Master/SetCalDCI",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelMaster\u002BparamCalftt",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "SET_CALENDAR_FTT",
+    "RelativePath": "Master/SetCalFTT",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelMaster\u002BparamCalftt",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Master",
+    "Method": "SET_PARTMSTR",
+    "RelativePath": "Master/SetPartMstr",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "param",
+        "Type": "API.Model.ModelMaster\u002BparamPartmstr",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Transaction",
+    "Method": "GETSETCONTROL",
+    "RelativePath": "Transaction/GetSetcontrol",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.Transaction",
+    "Method": "GET_WHMSTR",
+    "RelativePath": "Transaction/Getwhmstr",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

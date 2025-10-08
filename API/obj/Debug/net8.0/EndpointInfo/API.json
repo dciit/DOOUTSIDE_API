@@ -1,0 +1,986 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/Auth/chk_login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramLogin"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramLogin"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Auth/chk_login_emp": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramLogin"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramLogin"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Doplan/GetDoPlan": {
+      "get": {
+        "tags": [
+          "Doplan"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Doplan/GetVDMstr": {
+      "get": {
+        "tags": [
+          "Doplan"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Doplan/GetHistoryPlan": {
+      "post": {
+        "tags": [
+          "Doplan"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DOPLANKEY"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DOPLANKEY"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DOPLANKEY"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Doplan/EditDOPlan": {
+      "post": {
+        "tags": [
+          "Doplan"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DOPLANKEY"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DOPLANKEY"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DOPLANKEY"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Doplan/GetReport": {
+      "get": {
+        "tags": [
+          "Doplan"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Doplan/Getrecdate": {
+      "post": {
+        "tags": [
+          "Doplan"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DOPLANKEY"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DOPLANKEY"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DOPLANKEY"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/GetPartMstr": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/SetPartMstr": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramPartmstr"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramPartmstr"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramPartmstr"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/EditPartMstr": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramPartmstr"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramPartmstr"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramPartmstr"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/DelPartMstr": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramPartmstr"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramPartmstr"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramPartmstr"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/GetWhmstr": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/EditWhmstr": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramWhoutsite"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramWhoutsite"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramWhoutsite"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/GetDelCycle": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/EditDelCycle": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramDelcycle"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramDelcycle"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramDelcycle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/GetCalFTT": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/SetCalFTT": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/DelCalFTT": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/GetCalDCI": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/SetCalDCI": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/DelCalDCI": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/paramCalftt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/GetRangeDate": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Master/GetSharevd": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Transaction/GetSetcontrol": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Transaction/Getwhmstr": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DOPLANKEY": {
+        "type": "object",
+        "properties": {
+          "nbr": {
+            "type": "string",
+            "nullable": true
+          },
+          "setcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "partno": {
+            "type": "string",
+            "nullable": true
+          },
+          "cm": {
+            "type": "string",
+            "nullable": true
+          },
+          "vender": {
+            "type": "string",
+            "nullable": true
+          },
+          "doqtyOld": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doqtyNew": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "markqtyOld": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "markqtyNew": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dodate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "update_by": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "paramCalftt": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "nullable": true
+          },
+          "end": {
+            "type": "string",
+            "nullable": true
+          },
+          "desc": {
+            "type": "string",
+            "nullable": true
+          },
+          "empcode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "paramDelcycle": {
+        "type": "object",
+        "properties": {
+          "old_venderc": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_deltype": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_delsun": {
+            "type": "boolean"
+          },
+          "old_delmon": {
+            "type": "boolean"
+          },
+          "old_deltue": {
+            "type": "boolean"
+          },
+          "old_delwed": {
+            "type": "boolean"
+          },
+          "old_delthu": {
+            "type": "boolean"
+          },
+          "old_delfri": {
+            "type": "boolean"
+          },
+          "old_delsat": {
+            "type": "boolean"
+          },
+          "old_updateby": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_updatedt": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_venderc": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_deltype": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_delsun": {
+            "type": "boolean"
+          },
+          "new_delmon": {
+            "type": "boolean"
+          },
+          "new_deltue": {
+            "type": "boolean"
+          },
+          "new_delwed": {
+            "type": "boolean"
+          },
+          "new_delthu": {
+            "type": "boolean"
+          },
+          "new_delfri": {
+            "type": "boolean"
+          },
+          "new_delsat": {
+            "type": "boolean"
+          },
+          "new_updateby": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_updatedt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "paramLogin": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "paramPartmstr": {
+        "type": "object",
+        "properties": {
+          "old_partno": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_cm": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_partname": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_vender_c": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_sfstk_qty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_mark_qty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_min_qty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_max_qty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_qty_box": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_box_pl": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_truck_stack": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_pallet_stack": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_pd_lt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_preorder_days": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_typecal": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_mark_status": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_status": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_update_by": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_update_dt": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_partno": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_cm": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_partname": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_vender_c": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_sfstk_qty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_mark_qty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_min_qty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_max_qty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_qty_box": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_box_pl": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_truck_stack": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_pallet_stack": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_pd_lt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_preorder_days": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_typecal": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_mark_status": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_status": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_update_by": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_update_dt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "paramWhoutsite": {
+        "type": "object",
+        "properties": {
+          "old_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_vender_c": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_wh_n": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_whno": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_fixeddays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "old_update_by": {
+            "type": "string",
+            "nullable": true
+          },
+          "old_update_dt": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_vender_c": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_wh_n": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_whno": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_fixeddays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "new_update_by": {
+            "type": "string",
+            "nullable": true
+          },
+          "new_update_dt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

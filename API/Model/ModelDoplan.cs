@@ -32,6 +32,7 @@
             public decimal picklist { get; set; }
             public DateTime recive_dt { get; set; }
             public decimal recive_qty { get; set; }
+            public decimal send_qty { get; set; }
             public DateTime vdtowhb_dt { get; set; }
             public decimal vdtowhb_qty { get; set; }
             public DateTime data_dt { get; set; }
@@ -170,6 +171,7 @@
             public string acdate { get; set; }
             public string vendor { get; set; }
             public string actime { get; set; }
+            public string bit { get; set; }
         }
         public class FTTACT
         {

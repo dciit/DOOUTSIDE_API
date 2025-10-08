@@ -1,0 +1,74 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Project_DCI_teerapat\\project\\DOOUTSITE\\DOOUTSIDE_API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5405F52A-442E-4F26-A412-DC7F40CC92C6}|API\\API.csproj|d:\\project_dci_teerapat\\project\\dooutsite\\dooutside_api\\api\\controllers\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5405F52A-442E-4F26-A412-DC7F40CC92C6}|API\\API.csproj|solutionrelative:api\\controllers\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5405F52A-442E-4F26-A412-DC7F40CC92C6}|API\\API.csproj|d:\\project_dci_teerapat\\project\\dooutsite\\dooutside_api\\api\\controllers\\doplan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5405F52A-442E-4F26-A412-DC7F40CC92C6}|API\\API.csproj|solutionrelative:api\\controllers\\doplan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5405F52A-442E-4F26-A412-DC7F40CC92C6}|API\\API.csproj|d:\\project_dci_teerapat\\project\\dooutsite\\dooutside_api\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5405F52A-442E-4F26-A412-DC7F40CC92C6}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Project_DCI_teerapat\\project\\DOOUTSITE\\DOOUTSIDE_API\\API\\Program.cs",
+              "RelativeDocumentMoniker": "API\\Program.cs",
+              "ToolTip": "D:\\Project_DCI_teerapat\\project\\DOOUTSITE\\DOOUTSIDE_API\\API\\Program.cs",
+              "RelativeToolTip": "API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-05T08:47:21.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Master.cs",
+              "DocumentMoniker": "D:\\Project_DCI_teerapat\\project\\DOOUTSITE\\DOOUTSIDE_API\\API\\Controllers\\Master.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\Master.cs",
+              "ToolTip": "D:\\Project_DCI_teerapat\\project\\DOOUTSITE\\DOOUTSIDE_API\\API\\Controllers\\Master.cs",
+              "RelativeToolTip": "API\\Controllers\\Master.cs",
+              "ViewState": "AgIAAN4AAAAAAAAAAAAwwKkAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T04:06:28.638Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Doplan.cs",
+              "DocumentMoniker": "D:\\Project_DCI_teerapat\\project\\DOOUTSITE\\DOOUTSIDE_API\\API\\Controllers\\Doplan.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\Doplan.cs",
+              "ToolTip": "D:\\Project_DCI_teerapat\\project\\DOOUTSITE\\DOOUTSIDE_API\\API\\Controllers\\Doplan.cs",
+              "RelativeToolTip": "API\\Controllers\\Doplan.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwHMDAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T08:37:08.872Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

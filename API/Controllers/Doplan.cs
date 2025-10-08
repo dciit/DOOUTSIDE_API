@@ -20,7 +20,7 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("GetDoPlan")]
-        public IActionResult GET_DOPLAN()
+        public IActionResult GET_DOPLAN([FromQuery] string id)
         {
             string strDT = "1901-01-01";
             DateTime DT = Convert.ToDateTime(strDT);
@@ -28,14 +28,14 @@ namespace API.Controllers
             // doplan now
             List<cDOPLAN> oDOPLANs = new List<cDOPLAN>();
             SqlCommand sqlSelectFindSetcontrol = new SqlCommand();
-            sqlSelectFindSetcontrol.CommandText = @"
+            sqlSelectFindSetcontrol.CommandText = $@"
             SELECT  [REV],[LREV],[NBR],[SET_CODE],[PRDYMD],[DO_DATE],[VENDER],[VENDER_N],[PARTNO],[CM],[PARTNAME],[WHNO],[WHCODE],[WHNAME],[PLAN_QTY],[CONSUMTION_QTY],
                    [CAL_QTY],[CALDOD_QTY],[MARK_QTY],[DO_QTY],[STK_INHOUSE_BF],[STK_INHOUSE_AF],[STK_WH_BF],[STK_WH_AF],[PICKLIST],[RECIVE_DT],[RECIVE_QTY],[VDTOWHB_DT],[VDTOWHB_QTY],[DATA_DT],[REMARK1],[REMARK2],[REMARK3]
 
             FROM [dbSCM].[dbo].[DOOUT_DOPLAN] 
 
             WHERE [SET_CODE] = (SELECT MAX([SET_CODE]) FROM [dbSCM].[dbo].[DOOUT_DOPLAN])
-            AND [LREV] = 999";
+            AND [LREV] = 999 AND VENDER = '{id}'";
 
             DataTable dtgelSK = conDBSCM.Query(sqlSelectFindSetcontrol);
             if (dtgelSK.Rows.Count > 0)
@@ -103,10 +103,10 @@ namespace API.Controllers
                 while (P_OLD_EN < P_OLD_ST)
                 {
                     SqlCommand sqlselectolddata = new SqlCommand();
-                    sqlselectolddata.CommandText = @"
+                    sqlselectolddata.CommandText = $@"
                 SELECT *
                   FROM [dbSCM].[dbo].[DOOUT_DOPLAN]
-                  WHERE [DO_DATE] = @DT AND [LREV] = 999 AND [SET_CODE] = (SELECT MAX([SET_CODE]) FROM [dbSCM].[dbo].[DOOUT_DOPLAN] WHERE [DO_DATE] = @DT)";
+                  WHERE [DO_DATE] = @DT AND [LREV] = 999 AND VENDER = '{id}' AND [SET_CODE] = (SELECT MAX([SET_CODE]) FROM [dbSCM].[dbo].[DOOUT_DOPLAN] WHERE [DO_DATE] = @DT)";
 
                     sqlselectolddata.Parameters.Add(new SqlParameter("@DT", P_OLD_EN.Date.ToString("yyyy-MM-dd")));
                     DataTable dtoldp = conDBSCM.Query(sqlselectolddata);
@@ -372,7 +372,8 @@ namespace API.Controllers
                 }
                 oDOPLANs = oDOPLANs.Where(item => !partvds.Any(key =>
                     item.partno == key.partno &&
-                    item.cm == key.cm)).ToList();
+                    item.cm == key.cm &&
+                    item.vender == key.vender)).ToList();
 
                 // vender -> whb actual part
                 OracleCommand selectVdToFtt = new OracleCommand();
@@ -382,10 +383,10 @@ namespace API.Controllers
                 //WHERE ACDATE = :Datenow
                 //GROUP BY PONO, WHNO, PARTNO, CM, ACDATE, HTCODE, ACTIME";
                 selectVdToFtt.CommandText = @"
-                SELECT PONO, WHNO, PARTNO, CM, SUM(WQTY) AS WQTY, ACDATE, HTCODE, ACTIME 
+                SELECT WHNO, PARTNO, CM, SUM(WQTY) AS WQTY, ACDATE, HTCODE, ACTIME 
                 FROM DST_DATAC1 
-                WHERE TRIM(ACDATE) BETWEEN :stdate AND :endate
-                GROUP BY PONO, WHNO, PARTNO, CM, ACDATE, HTCODE, ACTIME";
+                WHERE TRIM(ACDATE) BETWEEN :stdate AND :endate AND WHNO = 'WB'
+                GROUP BY WHNO, PARTNO, CM, ACDATE, HTCODE, ACTIME";
 
                 selectVdToFtt.Parameters.Add(new OracleParameter("stdate", DateTime.Now.AddDays(-5).ToString("yyyyMMdd")));
                 selectVdToFtt.Parameters.Add(new OracleParameter("endate", DateTime.Now.AddDays(1).ToString("yyyyMMdd")));
@@ -395,7 +396,6 @@ namespace API.Controllers
                 foreach (DataRow dr in dt.Rows)
                 {
                     DST_DATAC1 item = new DST_DATAC1();
-                    item.pono = dr["PONO"]!.ToString()!.Trim();
                     item.whno = dr["WHNO"]!.ToString()!.Trim();
                     item.partno = dr["PARTNO"]!.ToString()!.Trim();
                     item.cm = dr["CM"]!.ToString()!.Trim();
@@ -851,11 +851,7 @@ namespace API.Controllers
         [Route("EditDOPlan")]
         public IActionResult EDIT_DOPLAN([FromBody] DOPLANKEY param)
         {
-            string strDT = "1901-01-01";
-            DateTime DT = Convert.ToDateTime(strDT);
             EditDoplan process = new EditDoplan();
-
-
             process.CalEditDOPLAN(param);
 
 
@@ -864,6 +860,20 @@ namespace API.Controllers
                 status = "success",
                 msg = "แก้ไขรายการสำเร็จ"
             };
+
+            if (statusResult.status == "success")
+            {
+                string Old_Value = $@"setcode={param.setcode.ToString()},partno={param.partno.ToString()},cm={param.cm.ToString()},do_qty={param.doqtyOld.ToString()},mark_qty={param.markqtyOld},dodate={param.dodate.ToString("yyyy-MM-dd")}";
+
+                string New_Value = $@"setcode={param.setcode.ToString()},partno={param.partno.ToString()},cm={param.cm.ToString()},do_qty={param.doqtyNew.ToString()},mark_qty={param.markqtyNew},dodate={param.dodate.ToString("yyyy-MM-dd")}";
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @$"INSERT INTO [dbSCM].[dbo].[DOOUT_ACTION_LOG] 
+                                  ([process],[action],[old_data],[new_data],[action_by],[action_dt])
+                                  VALUES
+                                  ('EDIT_DOPLAN','EDIT','{Old_Value}','{New_Value}','{param.update_by}',GETDATE())";
+                conDBSCM.ExecuteCommand(cmd);
+            }
 
 
             return Ok(statusResult);
@@ -886,7 +896,7 @@ namespace API.Controllers
             FROM [dbSCM].[dbo].[DOOUT_DOPLAN]
 
             WHERE [SET_CODE] = (SELECT MAX([SET_CODE]) FROM [dbSCM].[dbo].[DOOUT_DOPLAN])
-            AND [LREV] = 999 AND [DO_QTY] > 0";
+            AND [LREV] = 999 AND ([DO_QTY] > 0 OR MARK_QTY > 0)";
 
             DataTable dtgelSK = conDBSCM.Query(sqlSelectFindSetcontrol);
             if (dtgelSK.Rows.Count > 0)
@@ -957,7 +967,7 @@ namespace API.Controllers
                     sqlselectolddata.CommandText = @"
                 SELECT *
                   FROM [dbSCM].[dbo].[DOOUT_DOPLAN]
-                  WHERE [DO_DATE] = @DT AND [LREV] = 999 AND [DO_QTY] > 0 AND [SET_CODE] = (SELECT MAX([SET_CODE]) FROM [dbSCM].[dbo].[DOOUT_DOPLAN] WHERE [DO_DATE] = @DT)";
+                  WHERE [DO_DATE] = @DT AND [LREV] = 999 AND ([DO_QTY] > 0 OR MARK_QTY > 0) AND [SET_CODE] = (SELECT MAX([SET_CODE]) FROM [dbSCM].[dbo].[DOOUT_DOPLAN] WHERE [DO_DATE] = @DT)";
 
                     sqlselectolddata.Parameters.Add(new SqlParameter("@DT", P_OLD_EN.Date.ToString("yyyy-MM-dd")));
                     DataTable dtoldp = conDBSCM.Query(sqlselectolddata);
@@ -1029,7 +1039,7 @@ namespace API.Controllers
                 }
                 oDOPLANs = oDOPLANs.Where(item => !partvds.Any(key =>
                     item.partno == key.partno &&
-                    item.cm == key.cm)).ToList();
+                    item.cm == key.cm && item.vender == key.vender)).ToList();
 
                 //whb -> wh1 actual part
                 OracleCommand selectFttToDci = new OracleCommand();
@@ -1040,27 +1050,32 @@ namespace API.Controllers
                 //WHERE DTC.DELDATE  BETWEEN :stdate AND :endate
                 //    AND DTC.RCBIT = 'F' AND DTC.FWH = 'WB' AND DTC.TWH IN ('W1','W2')
                 //GROUP BY  DTC.RDATE, DTC.DELDATE, DTC.FWH, DTC.TWH, DTD.PARTNO, DTD.CM";
-                selectFttToDci.CommandText = @"
+                selectFttToDci.CommandText = $@"
                 SELECT
                     CAST(DTC.RDATE AS DATE) AS RDATE,
+                    --DTC.DELDATE,
                     DTC.FWH,
                     DTC.TWH,
                     DTD.PARTNO,
                     DTD.CM,
-                    SUM(DTD.RQTY) AS RQTY
+                    SUM(DTD.RQTY) AS RQTY,
+                    DTC.RCBIT
                 FROM MC.DST_ISTCTL DTC
-                LEFT JOIN MC.DST_ISTDTL DTD ON DTC.DELNO = DTD.DELNO
+                INNER JOIN MC.DST_ISTDTL DTD ON DTC.DELNO = DTD.DELNO
                 WHERE
+                    --DTC.DELDATE between '{DateTime.Now.AddDays(-5).ToString("yyyyMMdd").Trim()}' AND '{DateTime.Now.AddDays(1).ToString("yyyyMMdd").Trim()}'
                     DTC.RDATE BETWEEN TO_DATE(:stdate, 'YYYY-MM-DD') AND TO_DATE(:endate, 'YYYY-MM-DD')
                     AND DTC.RCBIT = 'F'
                     AND DTC.FWH = 'WB'
-                    AND DTC.TWH IN('W1', 'W2')
+                    AND DTC.TWH IN('W1', 'W2', 'WE')
                 GROUP BY
+                    --DTC.DELDATE,
                     CAST(DTC.RDATE AS DATE),
                     DTC.FWH,
                     DTC.TWH,
                     DTD.PARTNO,
-                    DTD.CM";
+                    DTD.CM,
+                    DTC.RCBIT";
 
                 selectFttToDci.Parameters.Add(new OracleParameter("stdate", DateTime.Now.AddDays(-5).ToString("yyyy-MM-dd")));
                 selectFttToDci.Parameters.Add(new OracleParameter("endate", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")));
@@ -1074,8 +1089,8 @@ namespace API.Controllers
                     item.partno = dr["PARTNO"].ToString().Trim();
                     item.cm = dr["CM"].ToString().Trim();
                     item.wqty = double.Parse(dr["RQTY"].ToString());
+                    //item.acdate = Convert.ToDateTime(dr["DELDATE"]).ToString("yyyyMMdd");
                     item.acdate = Convert.ToDateTime(dr["RDATE"]).ToString("yyyyMMdd");
-
                     ftt_to_dcis.Add(item);
                 }
                 foreach (var dp in oDOPLANs)
@@ -1094,7 +1109,77 @@ namespace API.Controllers
                         dp.recive_dt = DateTime.ParseExact(matchingWQTYs.FirstOrDefault()?.acdate, "yyyyMMdd", null);
                     }
                 }
+                // รายการที่ส่งแล้ว รอรับ
+                string str_date = "1901-01-01";
+                DateTime dt = Convert.ToDateTime(str_date);
 
+                OracleCommand SelectFttsend = new OracleCommand();
+                SelectFttsend.CommandText = $@"
+                SELECT
+                    DTC.DELNO,
+                    DTD.DELNO,
+                    --CAST(DTC.RDATE AS DATE) AS RDATE,
+                    CAST(DTC.SDATE AS DATE) AS SDATE,
+                    --DTC.DELDATE,
+                    DTC.FWH,
+                    DTC.TWH,
+                    DTD.PARTNO,
+                    DTD.CM,
+                    SUM(DTD.SQTY) AS SQTY,
+                    DTC.DELBIT,
+                    DTC.RCBIT
+                FROM MC.DST_ISTCTL DTC
+                INNER JOIN MC.DST_ISTDTL DTD ON DTC.DELNO = DTD.DELNO
+                WHERE
+                    TRUNC(DTC.SDATE) BETWEEN TO_DATE(:stdate, 'YYYY-MM-DD') AND TO_DATE(:endate, 'YYYY-MM-DD')
+                    AND DTC.DELBIT = 'F'
+                    AND DTC.RCBIT = 'U'
+                    AND DTC.FWH = 'WB'
+                    --AND DTC.TWH IN ('W1', 'W2')
+                GROUP BY
+                    DTC.DELNO,
+                    DTD.DELNO,
+                    CAST(DTC.SDATE AS DATE),
+                    DTC.FWH,
+                    DTC.TWH,
+                    DTD.PARTNO,
+                    DTD.CM,
+                    DTC.DELBIT,
+                    DTC.RCBIT";
+
+                SelectFttsend.Parameters.Add(new OracleParameter("stdate", DateTime.Now.AddDays(-5).ToString("yyyy-MM-dd")));
+                SelectFttsend.Parameters.Add(new OracleParameter("endate", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")));
+                DataTable dt_send = dbAlpha2.Query(SelectFttsend);
+                List<FTTACT> ftt_send = new List<FTTACT>();
+                if (dt_send.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt_send.Rows)
+                    {
+                        FTTACT item = new FTTACT();
+                        item.delldate = Convert.ToDateTime(dr["SDATE"]).ToString("yyyyMMdd");
+                        item.partno = dr["PARTNO"].ToString().Trim();
+                        item.cm = dr["CM"].ToString().Trim();
+                        item.sqty = Convert.ToDecimal(dr["SQTY"]);
+                        //item.rqty = Convert.ToDecimal(dr["RQTY"]);
+
+                        ftt_send.Add(item);
+                    }
+                }
+                foreach (var dp in oDOPLANs)
+                {
+                    var doDateString = dp.do_date.ToString("yyyyMMdd");  // <<< แปลง do_date เป็น string
+
+                    var matchingWQTYs = ftt_send
+                        .Where(dst => dst.partno.Trim() == dp.partno.Trim()
+                                   && dst.cm.Trim() == dp.cm.Trim()
+                                   && dst.delldate == doDateString)  // <<< เทียบ string ตรงๆ
+                        .Select(dst => new { dst.sqty });
+
+                    if (matchingWQTYs.Any())
+                    {
+                        dp.send_qty = Convert.ToDecimal(matchingWQTYs.Sum(m => m.sqty));
+                    }
+                }
                 // set part is shipping to day
                 var partNumbersWithPositiveQty = oDOPLANs
                     .Where(item => item.do_date.Date.Date == DateTime.Now.Date && item.do_qty > 0)
@@ -1382,17 +1467,20 @@ namespace API.Controllers
                 }
                 // update share vender 
                 List<SHAREVD> listsharevd = GET_SHAREVD();
+
                 foreach (var item in listsharevd)
                 {
-                    var match = oDOPLANs.FirstOrDefault(x =>
-                    x.partno.Trim() == item.partno.Trim() &&
-                    x.cm.Trim() == item.cm.Trim()
-                    );
-                    if (match != null)
+                    var matches = oDOPLANs
+                        .Where(x =>
+                            x.partno.Trim() == item.partno.Trim() &&
+                            x.cm.Trim() == item.cm.Trim());
+
+                    foreach (var m in matches)
                     {
-                        match.vender_n = item.grpvd;
+                        m.vender_n = item.grpvd;  // อัปเดตค่า
                     }
                 }
+
                 return Ok(oDOPLANs);
             }
             else
@@ -1426,7 +1514,18 @@ namespace API.Controllers
             //WHERE DTC.DELDATE  BETWEEN :stdate AND :endate
             //    AND DTC.RCBIT = 'F' AND DTC.FWH = 'WB' AND DTC.TWH IN ('W1','W2')
             //GROUP BY  DTC.RDATE, DTC.DELDATE, DTC.FWH, DTC.TWH, DTD.PARTNO, DTD.CM";
-            string cm = param.cm == "" ? " " : param.cm.Trim();
+            string cmCondition;
+
+            if (string.IsNullOrWhiteSpace(param.cm))
+            {
+                // เช็คทั้ง NULL และค่าว่างใน Oracle
+                cmCondition = "(TRIM(DTD.CM) IS NULL OR TRIM(DTD.CM) = '')";
+            }
+            else
+            {
+                cmCondition = $"TRIM(DTD.CM) = '{param.cm.Trim()}'";
+            }
+
             selectFttToDci.CommandText = $@"
             SELECT
                 DTC.DELDATE,
@@ -1434,20 +1533,24 @@ namespace API.Controllers
                 CAST(DTC.RDATE AS DATE) AS RDATE,
                 DTC.FWH,
                 DTC.TWH,
-                DTD.PARTNO,
-                DTD.CM,
+                TRIM(DTD.PARTNO) AS PARTNO,
+                TRIM(DTD.CM) AS CM,
                 DTD.SQTY,
                 DTD.RQTY
             FROM MC.DST_ISTCTL DTC
             LEFT JOIN MC.DST_ISTDTL DTD ON DTC.DELNO = DTD.DELNO
             WHERE
-                DTC.DELDATE = '{param.dodate.ToString("yyyyMMdd").Trim()}'
-                --AND DTC.RCBIT = 'F'
+                TRUNC(DTC.RDATE) = TO_DATE('{param.dodate.ToString("yyyy-MM-dd")}', 'YYYY-MM-DD')
+                AND DTC.RCBIT = 'F'
                 AND DTC.FWH = 'WB'
                 AND DTC.TWH IN ('W1','W2')
-                AND DTD.PARTNO = '{param.partno.Trim()}' 
-                AND DTD.CM = '{cm}' 
+                AND TRIM(DTD.PARTNO) = '{param.partno}'
+                AND {cmCondition}
             ORDER BY SDATE ASC";
+
+
+            //selectFttToDci.Parameters.Add(new OracleParameter("stdate", param.dodate.ToString("yyyy-MM-dd")));
+            //selectFttToDci.Parameters.Add(new OracleParameter("endate", param.dodate.ToString("yyyy-MM-dd")));
 
             DataTable dt_r = dbAlpha2.Query(selectFttToDci);
             List<FTTACT> ftt_to_dcis = new List<FTTACT>();
